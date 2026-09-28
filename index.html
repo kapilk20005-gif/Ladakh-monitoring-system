@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="ColdGuard Ladakh Forward Base Monitoring System">
+<title>ColdGuard | Ladakh Forward Base Monitoring System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+  <script src="js/firebase-config.js"></script>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="side-brand"><div><strong>ColdGuard</strong><small>Ladakh Forward Base Monitoring</small></div></div>
+    <nav>
+      <button class="nav-item active" data-scroll="home"><span class="ico">⌂</span>Home</button>
+      <button class="nav-item" data-scroll="bases"><span class="ico">⌘</span>Forward Bases</button>
+      <button class="nav-item" data-scroll="logs"><span class="ico">▣</span>System Logs</button>
+      <button class="nav-item" data-scroll="settings"><span class="ico">⚙</span>Settings</button>
+    </nav>
+    <div class="side-bottom">
+      <img src="mountain-silhouette.png" alt="Ladakh mountains">
+      <p>High Altitude<br>High Responsibility<br>Stronger Together</p>
+      <div class="mini-bars"><i></i><i></i><i></i></div>
+    </div>
+  </aside>
+
+  <main class="content" id="home">
+    <header class="topbar">
+      <div class="top-title"><div class="mini-logo"><span></span><span></span><span></span></div><strong>ColdGuard</strong><em></em><span>Ladakh Forward Base Monitoring System</span></div>
+      <div class="top-right"><span class="live-dot"></span><span>Live Data</span><em></em><span id="date">26 Sep 2026</span><span id="clock">13:42</span><em></em><span class="user-icon">●</span><span>Field Ops</span></div>
+    </header>
+
+    <section class="hero" id="master">
+      <div>
+        <button class="master-detail-btn" id="masterDetailsBtn">View Master Node Details →</button>
+  
+      </div>
+      <div class="hero-copy" >
+        <div class="hero-kicker"><span class="hero-icon">♟</span> MASTER NODE</div>
+       
+      </div>
+      <div class="hero-image"><div class="online-pill">ONLINE <span>⌁</span></div></div>
+      <div class="hero-stats">
+        <div><span class="stat-icon blue">♟</span><div><small>Total Bases</small><b>6</b></div></div>
+        <div><span class="stat-icon green">♙</span><div><small>Active Bases</small><b id="activeBases">6</b></div></div>
+        <div><span class="stat-icon blue">◈</span><div><small>System Health</small><b id="systemHealth">Good</b></div></div>
+        <div><span class="stat-icon gray">◷</span><div><small>Last Update</small><b id="lastUpdate">Live</b></div></div>
+      </div>
+    </section>
+
+    <div class="workspace">
+      <section class="bases-section" id="bases">
+        <div class="section-title"><div><h2>⌖ <span>Forward Bases</span></h2><p>Click on any base to view detailed information and live sensor data.</p></div></div>
+        <div class="base-grid" id="baseGrid"></div>
+      </section>
+
+      <aside class="right-column">
+        <section class="side-card" id="logs">
+          <h3>♧ <span>Field Status Summary</span></h3><p>Quick overview for personnel in the field.</p>
+          <div class="status-list">
+            <div><span>♨</span><label>Temperature</label><b>Normal</b></div>
+            <div><span>◉</span><label>Humidity</label><b>Normal</b></div>
+            <div><span>◌</span><label>Pressure</label><b>Normal</b></div>
+            <div><span>☀</span><label>Solar Power</label><b>Normal</b></div>
+            <div><span>✺</span><label>UV Radiation</label><b>Normal</b></div>
+            <div><span>▣</span><label>Battery</label><b>Normal</b></div>
+            <div><span>◈</span><label>System Health</label><b>Good</b></div>
+          </div>
+        </section>
+        <section class="side-card" id="settings">
+          <h3>⌁ <span>Quick Info</span></h3>
+          <div class="quick-list">
+            <div><span>⌖</span><label>Location</label><b>Ladakh, India</b></div>
+            <div><span>♜</span><label>Altitude</label><b>3,000 – 5,500 m</b></div>
+            <div><span>☁</span><label>Weather</label><b>-12°C (Avg)</b></div>
+            <div><span>⌁</span><label>Network</label><b>Firebase (Live)</b></div>
+          </div>
+        </section>
+        <section class="quote-card"><div class="quote-mountain"></div><strong>Safe Soldiers<br>Secure Borders<br>ColdGuard</strong><div class="quote-lines"><i></i><i></i></div></section>
+      </aside>
+    </div>
+
+    <!-- COLDGUARD BATTERY HISTORY DASHBOARD -->
+    <section class="battery-history-section" id="batteryHistorySection">
+      <div class="battery-history-header">
+        <div>
+          <span class="section-kicker">ENERGY MONITORING</span>
+          <h2>Battery History &amp; Power Trend</h2>
+          <p>Track charge level, daily change and recent battery performance.</p>
+        </div>
+        <div class="battery-live-pill"><span class="battery-live-dot"></span> LIVE HISTORY</div>
+      </div>
+    
+      <div class="battery-summary-grid">
+        <div class="battery-summary-card">
+          <span>Current Battery</span>
+          <strong id="batteryCurrent">--%</strong>
+          <small id="batteryCurrentTime">Waiting for data</small>
+        </div>
+        <div class="battery-summary-card">
+          <span>Yesterday</span>
+          <strong id="batteryYesterday">--%</strong>
+          <small>Last recorded value</small>
+        </div>
+        <div class="battery-summary-card">
+          <span>24h Change</span>
+          <strong id="battery24hChange">--</strong>
+          <small>Charge / discharge trend</small>
+        </div>
+        <div class="battery-summary-card">
+          <span>7-Day Low</span>
+          <strong id="battery7dLow">--%</strong>
+          <small>Lowest recorded level</small>
+        </div>
+      </div>
+    
+      <div class="battery-history-layout">
+        <div class="battery-chart-card">
+          <div class="battery-card-top">
+            <div>
+              <h3>Battery Level History</h3>
+              <p>Latest 24 recorded readings</p>
+            </div>
+            <select id="batteryBaseSelect" aria-label="Select base for battery history">
+              <option value="master">Master Node</option>
+              <option value="base1">Forward Base 1</option>
+              <option value="base2">Forward Base 2</option>
+              <option value="base3">Forward Base 3</option>
+              <option value="base4">Forward Base 4</option>
+              <option value="base5">Forward Base 5</option>
+              <option value="base6">Forward Base 6</option>
+            </select>
+          </div>
+          <div class="battery-chart-wrap">
+            <canvas id="batteryHistoryChart" height="210"></canvas>
+            <div id="batteryChartEmpty" class="battery-chart-empty">Waiting for Firebase battery history...</div>
+          </div>
+        </div>
+    
+        <div class="battery-log-card">
+          <div class="battery-card-top">
+            <div>
+              <h3>Recent Battery Log</h3>
+              <p>Date, time and charge level</p>
+            </div>
+          </div>
+          <div class="battery-table-wrap">
+            <table class="battery-history-table">
+              <thead>
+                <tr><th>Date</th><th>Time</th><th>Battery</th><th>Trend</th></tr>
+              </thead>
+              <tbody id="batteryHistoryRows">
+                <tr><td colspan="4">Waiting for Firebase data...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+<script type="module" src="js/dashboard.js"></script>
+
+
+
+</body></html>
